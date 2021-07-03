@@ -1,0 +1,10 @@
+#addSelectorForm{
+    max-width: 700px;
+}
+.m-auto{
+    margin: auto;
+}
+.btn-color{
+    background:#26d02b;
+    color:#000;
+}
