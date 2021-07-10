@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {ToastProvider, useToasts } from 'react-toast-notifications'
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import './styles.css'
 /*{
@@ -13,6 +14,8 @@ import './styles.css'
 const FormWithToasts = () =>{
     const [formData, setFormDate] = useState({})
     const { addToast } = useToasts()
+    let history = useHistory();
+
     const inputHandler=(event)=>{
         const {name, value} = event.target
         const updatedData = {...formData, [name]:value}
@@ -33,6 +36,7 @@ const FormWithToasts = () =>{
                 autoDismiss: true,
               })
             document.querySelector('form').reset()
+            history.push("/");
           })
           .catch(function (error) {
               const message = error.message || 'Error Occurred !!'
@@ -47,7 +51,7 @@ const FormWithToasts = () =>{
     return (
        
         <form id="addSelectorForm" className="m-auto" onSubmit={submitFormHandler}>
-            <h2 className="text-center pb-5">Add Selector to Database</h2>
+            <h2 className="text-center pb-5">Add Selector Address to Database</h2>
             <div className="mb-3">
                 <label htmlFor="category" className="form-label">Category</label>
                 <input type="text" className="form-control" name="category" id="category" onChange={inputHandler} required/>
