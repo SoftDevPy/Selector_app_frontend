@@ -1,8 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Header from './components/Header'
 import AddSelectors from './components/AddSelectors'
@@ -12,15 +11,15 @@ import './App.css';
 function App(props) {
   return (
     <Router>
-      <Header {...props}></Header>
+      <Header></Header>
 
       <div className="container pt-5 pb-5">
         <Switch>
           <Route path="/" exact={true}>
-            <SelectorsList  {...props}></SelectorsList>
+            <SelectorsList></SelectorsList>
           </Route>
           <Route path="/add" exact={true}>
-            <AddSelectors  {...props}></AddSelectors>
+            <AddSelectors></AddSelectors>
           </Route>
         </Switch>
         
