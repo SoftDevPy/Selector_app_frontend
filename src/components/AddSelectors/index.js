@@ -36,7 +36,10 @@ const FormWithToasts = () =>{
                 autoDismiss: true,
               })
             document.querySelector('form').reset()
-            history.push("/");
+            setTimeout(()=>{
+                history.push("/");
+            }, 3000)
+            
           })
           .catch(function (error) {
               const message = error.message || 'Error Occurred !!'

@@ -1,0 +1,19 @@
+.minwidth160{
+    min-width: 160px;
+}
+.minwidth130{
+    min-width: 130px;
+}
+.path:hover{
+    cursor: pointer;
+    background: #016838;
+    border-color:#016838;
+    color:#fff;
+}
+
+
+.copySpan{
+    width: 100%;
+    display: inline-block;
+}
+
