@@ -4,11 +4,14 @@ import {ToastProvider, useToasts } from 'react-toast-notifications'
 import axios from 'axios'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import SelectBox from '../SelectBox'
+import EditSelectors from '../editSelectors'
 import './styles.css'
 const SelectorsListComponent = () =>{
     const [selectorDetails, setSelectorDetails] = useState([])
     const [categoryList, setCategoryList] = useState([])
     const [catName, setCatName] = useState('')
+    const [showModal, setShowModal] = useState(false)
+    const [selectedRecord, setSelectedRecord] = useState(null)
     const { addToast } = useToasts()
     useEffect(()=>{
         fetchAllSelectors()
@@ -65,7 +68,22 @@ const SelectorsListComponent = () =>{
           console.error(error)
     })
 
+  }
+  const editSelectorServer = (record) =>{
+    axios.put(`https://python-selector-app.herokuapp.com/selector/${record.id}`,  {...record})
+    .then(function (response) {
+            callCategoryApi(catName)
+        addToast('Updated Successfully!!', {
+            appearance: 'success',
+            autoDismiss: true,
+          })
+    })
+    .catch(function (error) {
+      console.error(error)
+})
+
 }
+
 
     const copyHandler = () =>{
         addToast('Address Copied!!', {
@@ -73,8 +91,23 @@ const SelectorsListComponent = () =>{
             autoDismiss: true,
           })
     }
+    const cancelHandler = () =>{
+        setShowModal(false)
+        setSelectedRecord(null)
+    }
+    const updateHandler = (record) =>{
+        editSelectorServer(record)
+        setShowModal(false)
+        setSelectedRecord(null)
+
+    }
+    const editHandler = (record) =>{
+        setSelectedRecord(record)
+        setShowModal(true)
+    }
     return (
         <div>
+            {showModal && <EditSelectors cancelHandler={cancelHandler} updateHandler={updateHandler} selectedRecord={selectedRecord}/>}
             <h2 className="text-center p-5">Selectors Address List</h2>
             <div className="row mb-5">
                 <div className="col-4">
@@ -101,16 +134,16 @@ const SelectorsListComponent = () =>{
                     <td>{record.type}</td>
                     <td className="path">
                    
-                    <CopyToClipboard text={record.path}
+                     <CopyToClipboard text={record.path}
                         onCopy={copyHandler}>
                         <span className="copySpan">{record.path}</span>
-                     </CopyToClipboard>
+                     </CopyToClipboard> 
                     </td>
                     <td>
-                        <button className="btn btn-sm btn-warning me-2">
+                        <button className="btn btn-sm btn-warning me-2 editBtn"  onClick={()=>editHandler(record)}>
                             Edit
                         </button>
-                        <button className="btn btn-sm btn-danger" onClick={()=>{deleteSelector(record.id)}}>
+                        <button className="btn btn-sm btn-danger deleteBtn" onClick={()=>{deleteSelector(record.id)}}>
                             Delete
                         </button>
                     </td>
