@@ -40,7 +40,7 @@ const SelectorsListComponent = () =>{
 
     const callCategoryApi = (categoryName) =>{
         
-        axios.get(`https://python-selector-app.herokuapp.com/catgetory/${categoryName}`)
+        axios.get(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/catgetory/${categoryName}`)
         .then(function (response) {
           const {data} = response
           setSelectorDetails([...data])
@@ -51,7 +51,7 @@ const SelectorsListComponent = () =>{
     }
 
     const deleteSelector = (selectorId) =>{
-        axios.delete(`https://python-selector-app.herokuapp.com/selector/${selectorId}`)
+        axios.delete(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selector/${selectorId}`)
         .then(function (response) {
             if(categoryList.length>1){
                 callCategoryApi(catName)
@@ -70,7 +70,7 @@ const SelectorsListComponent = () =>{
 
   }
   const editSelectorServer = (record) =>{
-    axios.put(`https://python-selector-app.herokuapp.com/selector/${record.id}`,  {...record})
+    axios.put(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selector/${record.id}`,  {...record})
     .then(function (response) {
             callCategoryApi(catName)
         addToast('Updated Successfully!!', {
