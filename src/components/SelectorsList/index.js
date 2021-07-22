@@ -19,7 +19,7 @@ const SelectorsListComponent = () =>{
     }, [])
 
     const fetchAllSelectors = () =>{
-        axios.get('http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selectors')
+        axios.get('https://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:8000/selectors')
         .then(function (response) {
           const {data} = response
           //setSelectorDetails([...data])
