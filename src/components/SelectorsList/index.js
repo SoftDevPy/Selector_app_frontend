@@ -19,7 +19,7 @@ const SelectorsListComponent = () =>{
     }, [])
 
     const fetchAllSelectors = () =>{
-        axios.get('https://python-selector-app.herokuapp.com/selectors')
+        axios.get('http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selectors')
         .then(function (response) {
           const {data} = response
           //setSelectorDetails([...data])
