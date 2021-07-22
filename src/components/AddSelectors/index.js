@@ -29,7 +29,7 @@ const FormWithToasts = () =>{
         
     }
     const callServer=()=>{
-        axios.post('https://python-selector-app.herokuapp.com/selectors', {...formData})
+        axios.post('http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selectors', {...formData})
           .then(function (response) {
             addToast(response.data, {
                 appearance: 'success',
