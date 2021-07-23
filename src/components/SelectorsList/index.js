@@ -19,7 +19,7 @@ const SelectorsListComponent = () =>{
     }, [])
 
     const fetchAllSelectors = () =>{
-        axios.get('https://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:8000/selectors')
+        axios.get('https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors')
         .then(function (response) {
           const {data} = response
           //setSelectorDetails([...data])
@@ -40,7 +40,7 @@ const SelectorsListComponent = () =>{
 
     const callCategoryApi = (categoryName) =>{
         
-        axios.get(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/catgetory/${categoryName}`)
+        axios.get(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/catgetory/${categoryName}`)
         .then(function (response) {
           const {data} = response
           setSelectorDetails([...data])
@@ -51,7 +51,7 @@ const SelectorsListComponent = () =>{
     }
 
     const deleteSelector = (selectorId) =>{
-        axios.delete(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selector/${selectorId}`)
+        axios.delete(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors/${selectorId}`)
         .then(function (response) {
             if(categoryList.length>1){
                 callCategoryApi(catName)
@@ -70,7 +70,7 @@ const SelectorsListComponent = () =>{
 
   }
   const editSelectorServer = (record) =>{
-    axios.put(`http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selector/${record.id}`,  {...record})
+    axios.put(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/selector/${record.id}`,  {...record})
     .then(function (response) {
             callCategoryApi(catName)
         addToast('Updated Successfully!!', {
