@@ -29,7 +29,7 @@ const FormWithToasts = () =>{
         
     }
     const callServer=()=>{
-        axios.post('http://ec2-52-15-36-88.us-east-2.compute.amazonaws.com:5000/selectors', {...formData})
+        axios.post('https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors', {...formData})
           .then(function (response) {
             addToast(response.data, {
                 appearance: 'success',
