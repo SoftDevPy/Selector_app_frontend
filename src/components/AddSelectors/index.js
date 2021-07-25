@@ -3,14 +3,7 @@ import {ToastProvider, useToasts } from 'react-toast-notifications'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import './styles.css'
-/*{
-    "category": "Salesforce main Login Page",
-    "name": "Login Page Username",
-    "path": "username",
-    "type":"id"
-}*/
-
-
+const BASE_URL = 'https://salesforce-selector-app-pglbf.ondigitalocean.app'
 const FormWithToasts = () =>{
     const [formData, setFormDate] = useState({})
     const { addToast } = useToasts()
@@ -29,7 +22,7 @@ const FormWithToasts = () =>{
         
     }
     const callServer=()=>{
-        axios.post('https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors', {...formData})
+        axios.post(`${BASE_URL}/selectors`, {...formData})
           .then(function (response) {
             addToast(response.data, {
                 appearance: 'success',

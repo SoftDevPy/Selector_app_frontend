@@ -6,6 +6,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import SelectBox from '../SelectBox'
 import EditSelectors from '../editSelectors'
 import './styles.css'
+const BASE_URL = 'https://salesforce-selector-app-pglbf.ondigitalocean.app'
 const SelectorsListComponent = () =>{
     const [selectorDetails, setSelectorDetails] = useState([])
     const [categoryList, setCategoryList] = useState([])
@@ -19,7 +20,7 @@ const SelectorsListComponent = () =>{
     }, [])
 
     const fetchAllSelectors = () =>{
-        axios.get('https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors')
+        axios.get(`${BASE_URL}/selectors`)
         .then(function (response) {
           const {data} = response
           //setSelectorDetails([...data])
@@ -40,7 +41,7 @@ const SelectorsListComponent = () =>{
 
     const callCategoryApi = (categoryName) =>{
         
-        axios.get(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/catgetory/${categoryName}`)
+        axios.get(`${BASE_URL}/catgetory/${categoryName}`)
         .then(function (response) {
           const {data} = response
           setSelectorDetails([...data])
@@ -51,7 +52,7 @@ const SelectorsListComponent = () =>{
     }
 
     const deleteSelector = (selectorId) =>{
-        axios.delete(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/selectors/${selectorId}`)
+        axios.delete(`${BASE_URL}/selectors/${selectorId}`)
         .then(function (response) {
             if(categoryList.length>1){
                 callCategoryApi(catName)
@@ -70,7 +71,7 @@ const SelectorsListComponent = () =>{
 
   }
   const editSelectorServer = (record) =>{
-    axios.put(`https://salesforce-selector-app-wn7tj.ondigitalocean.app/selector/${record.id}`,  {...record})
+    axios.put(`${BASE_URL}/selector/${record.id}`,  {...record})
     .then(function (response) {
             callCategoryApi(catName)
         addToast('Updated Successfully!!', {
